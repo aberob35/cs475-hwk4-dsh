@@ -6,6 +6,7 @@
  * @param cmd
  * @return positive code if true, CMD_EXT otherwise
  */
+//didnt change anything here
 cmd_t chkBuiltin(char *cmd) {
 	if (!strcmp(cmd, "cd"))
 		return CMD_CD;
