@@ -2,7 +2,7 @@
  * dsh.c
  *
  *  Created on: Aug 2, 2013
- *      Author: chiu
+ *      Author: Abram Robin
  */
 #include "dsh.h"
 #include <stdio.h>
@@ -48,9 +48,12 @@ void mode1(char *temp, int bgVal){
 		if(bgVal == 1){
 		printf("\n");
 		wait(NULL);
+		}else{
+			sleep(1);
 		}
 	}else{
 		//runs the command and reprompts
+		printf("mode 1 ran");
 		execv(terms[0],terms);
 		printf("ERROR: %s not found! \n", terms[0]);
 		exit(1);
@@ -63,6 +66,7 @@ void mode1(char *temp, int bgVal){
  }
 
 void mode2(char *temp, int bgVal){
+	int count = 0;
 	char **terms;
 	char copyTemp[256];
 	strcpy(copyTemp, temp);
@@ -77,62 +81,45 @@ void mode2(char *temp, int bgVal){
 		char cwd[256];
 		getcwd(cwd,256);
 		printf("%s \n", cwd);
-	}else if(access(terms[0], F_OK | X_OK) == 0){
-
-	//run process
-	if(0 != fork()){
-
-	//dealing with & case
-	//it works reprompt just looks weird
-	if(bgVal == 0){
-	printf("\n");
-	wait(NULL);
-	}
-
-	//if not then output error
 	}else{
-		//runs the command and reprompts
-		execv(terms[0],terms);
-		printf("ERROR: %s not found! \n", terms[0]);
-		exit(1);
-	}
-//if cd or pwd was not inputted test for other cases
-//test if it is in current wd
-}else{
-
 	//get all possible paths and test 
 	char *env = getenv("PATH");
+
 	//copy over becuase my split destorys line feed to it
 	// and i need the orginal line so i let split destroy a copy
 	char *copy = (char *)malloc(strlen(env) + 1);
 	strcpy(copy,env);
-
 	char **allPath = split(copy, ":");
+	//char **tempPath  = (char**) malloc(256 * sizeof(char*));
+
 	for(int i = 0; allPath[i] != NULL; i++){
 		strcat(allPath[i], "/");
 		strcat(allPath[i], terms[0]);
-		//printf("%s\n", allPath[i]);
 		if(access(allPath[i], F_OK | X_OK) == 0){
+			if(count == 0){
+				count++;
 			if(0 != fork()){
-
 				//dealing with & case
 				//it works reprompt just looks weird
 				if(bgVal == 0){
 				wait(NULL);
 				printf("\n");
+				}else{
+					sleep(1);
 				}
 			}else{
+				//strcpy(tempPath[0], allPath[i]);
 				execv(allPath[i], terms);
 				//error case
 				printf("Error: %s not valid \n", terms[0]);
 				exit(1);
+			}
 			}
 		}
 	}
 	errorCase(terms);
 }
 free(terms);
- 
 }
 
 
