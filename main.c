@@ -22,7 +22,9 @@ int main(int argc, char **argv){
 	//reprompt may look a little weird when & is inputted 
 	//but it does work
 	while(boolean == 0){
+	wait(NULL);
 	//prompt user 1st time and adds terminating char at end of string
+	strcpy(temp," ");
 	printf("Dsh> ");
 	fgets(temp,256,stdin);
 	temp[strlen(temp) - 1] = '\0';
@@ -30,8 +32,9 @@ int main(int argc, char **argv){
 	//ends while loop is exit inputted
 	if(strcmp(temp,"exit") == 0){
 		exit(1);
-		//boolean = 1;
+		boolean = 1;
 	}else if(strcmp(temp,"\0") == 0){
+	strcpy(temp," ");
 	printf("ERROR EMPTY STRING ENTERED \n");
 	printf("Dsh> ");
 	fgets(temp,256,stdin);
