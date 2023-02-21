@@ -44,6 +44,7 @@ void mode1(char *temp, int bgVal){
 		//create child to run command parent to reprompt
 	if(0 != fork()){
 		//deals with & case
+		//it works reprompt just looks weird
 		if(bgVal == 1){
 		printf("\n");
 		wait(NULL);
@@ -82,6 +83,7 @@ void mode2(char *temp, int bgVal){
 	if(0 != fork()){
 
 	//dealing with & case
+	//it works reprompt just looks weird
 	if(bgVal == 0){
 	printf("\n");
 	wait(NULL);
@@ -114,6 +116,7 @@ void mode2(char *temp, int bgVal){
 			if(0 != fork()){
 
 				//dealing with & case
+				//it works reprompt just looks weird
 				if(bgVal == 0){
 				wait(NULL);
 				printf("\n");
@@ -127,8 +130,6 @@ void mode2(char *temp, int bgVal){
 		}
 	}
 	errorCase(terms);
-	// if(strcmp(terms[0], "exit") != 0 || strcmp(terms[0], "cd") != 0 || strcmp(terms[0], "ls") != 0 || strcmp(terms[0], "cat") != 0)
-	// printf("Error This ONE: %s not valid \n", terms[0]);
 }
 free(terms);
  
@@ -175,6 +176,8 @@ void errorCase(char **terms){
 	}else if(strcmp(terms[0], "cat") == 0){
 	}else if(strcmp(terms[0], "cd") == 0){
 	}else if(strcmp(terms[0], "pwd") == 0){
+	}else if(strcmp(terms[0], "echo") == 0){
+	}else if(strcmp(terms[0], "gcc") == 0){
 	}else{
 	printf("Error: %s not valid \n", terms[0]);
 	}
