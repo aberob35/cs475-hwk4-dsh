@@ -4,9 +4,9 @@ typedef enum
 	CMD_CD,		// cd
 	CMD_PWD,	// pwd
 	CMD_HIST, // history
+	CMD_ECHO,// I added this here //ECHO
 	CMD_EXIT	// exit
 } cmd_t;
-
 /**
  * Checks whether given command string is a builtin
  * @param cmd	 A command string, such as "/bin/ls" or "exit"
