@@ -2,7 +2,7 @@
  * main.c
  *
  *  Created on: Mar 17 2017
- *      Author: Abram
+ *      Author: david
  */
 
 #include <stdio.h>
@@ -20,6 +20,7 @@ int main(int argc, char **argv){
 
 	//while loop to reprompt
 	while(boolean == 0){
+	//wait(NULL);
 	//prompt user 1st time and adds terminating char at end of string
 	printf("Dsh> ");
 	fgets(temp,256,stdin);
