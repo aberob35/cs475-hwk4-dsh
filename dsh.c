@@ -159,7 +159,8 @@ void cdCommand(char *temp){
 	}
 	
   }else{
-	chdir("..");
+	char *home = getenv("HOME");
+	chdir(home);
   }
   free(terms);
 }
