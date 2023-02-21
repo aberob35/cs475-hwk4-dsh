@@ -175,7 +175,7 @@ free(terms);
 	if(successCD == 0){
 		printf("\n");
 	}else{
-		printf("Cannot change into certain directory");
+		printf("Cannot change into certain directory \n");
 	}
 	
   }else{
