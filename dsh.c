@@ -17,7 +17,11 @@
 #include "builtins.h"
 
 //TODO: Your function definitions (declarations in dsh.h)
-char** split(char *str, char *delim){
+/**
+ * @param str string to get cut apart
+ * @param the delimeter 
+ * @return array containing terms
+ */char** split(char *str, char *delim){
     //allocating space 
     char **terms = (char**) malloc(256 * sizeof(char*));
     //variables for delimeter function
@@ -36,7 +40,10 @@ char** split(char *str, char *delim){
     return terms;
 }
 
-void mode1(char *temp, int bgVal){
+/**
+ * @param temp command line
+ * @param the whether or not it should run background or forground
+ */void mode1(char *temp, int bgVal){
 	//get commands and store them
 	char **terms;
 	terms = split(temp," ");
@@ -64,7 +71,10 @@ void mode1(char *temp, int bgVal){
 	free(terms);
  }
 
-void mode2(char *temp, int bgVal){
+/**
+ * @param temp command line
+ * @param the whether or not it should run background or forground
+ */void mode2(char *temp, int bgVal){
 	int count = 0;
 	char **terms;
 	char copyTemp[256];
@@ -115,6 +125,7 @@ void mode2(char *temp, int bgVal){
 		strcat(allPath[i], terms[0]);
 		//printf("%s\n", allPath[i]);
 		if(access(allPath[i], F_OK | X_OK) == 0){
+			//helps so it does not run more than 2 times
 			if(count == 0){
 			count++;
 			if(0 != fork()){
@@ -141,7 +152,10 @@ free(terms);
 }
 
 
-void cdCommand(char *temp){
+/**
+ * @param temp command line
+ * deasl with change directory command
+ */void cdCommand(char *temp){
 	char **terms;
 	char *path;
 	char *currentD = (char*) malloc(256 * sizeof(char));
@@ -171,7 +185,11 @@ void cdCommand(char *temp){
   free(terms);
 }
 
-void errorCase(char **terms){
+/**
+ * @param temp command line
+ * This test to see if there is a wrong input or 
+ * an input that execv cant run
+ */void errorCase(char **terms){
 	//test to see if the inputted value is one of the commands to deal with
 	//since our shell is supposed to only work with these commands 
 	// I test them this way. If it is all possible commands this 
