@@ -19,18 +19,21 @@ int main(int argc, char **argv){
 	int boolean = 0;
 
 	//while loop to reprompt
+	//reprompt may look a little weird when & is inputted 
+	//but it does work
 	while(boolean == 0){
 	//prompt user 1st time and adds terminating char at end of string
-	printf("\n Dsh> ");
+	printf("Dsh> ");
 	fgets(temp,256,stdin);
 	temp[strlen(temp) - 1] = '\0';
 
 	//ends while loop is exit inputted
 	if(strcmp(temp,"exit") == 0){
-		boolean = 1;
+		exit(1);
+		//boolean = 1;
 	}else if(strcmp(temp,"\0") == 0){
 	printf("ERROR EMPTY STRING ENTERED \n");
-	printf("\n Dsh> ");
+	printf("Dsh> ");
 	fgets(temp,256,stdin);
 	temp[strlen(temp) - 1] = '\0';
 	}
